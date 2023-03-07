@@ -22,6 +22,7 @@
 
 3.  To open the app in an android emulator, press `a` (you will need to install [Android Studio](https://developer.android.com/studio/) and run a device using the Virtual Device Manager before pressing `a`)
 
+
 4. To open the app in an iOS emulator, press `i` (you will need [Xcode](https://developer.apple.com/xcode/) installed)
 
 
