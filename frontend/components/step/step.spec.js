@@ -12,4 +12,15 @@ describe('step component', () => {
     expect(renderedComponent.getByText('Turn right')).not.toBeNull;
     expect(renderedComponent.getByText('along this road')).not.toBeNull;
   });
+  it('replaces Walk with Travel', () => {
+    stepPropWithWalk = {
+      descriptionHeading: 'Turn right',
+      description: 'Walk forwards',
+    };
+    renderedComponent = render(<Step step={stepPropWithWalk} />);
+    expect(() => {
+      renderedComponent.getByText('Walk forwards');
+    }).toThrow(new Error('Unable to find an element with text: Walk forwards'));
+    expect(renderedComponent.getByText('Travel forwards')).not.toBe(null);
+  });
 });

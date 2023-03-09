@@ -1,5 +1,7 @@
 const TFLClient = require('../clients/TFLClient.js');
 
+const tflClient = new TFLClient();
+
 const JourneyController = {
   Index: async (req, res) => {
     try {
@@ -8,7 +10,6 @@ const JourneyController = {
         res.status(400).send('Bad request');
         return;
       }
-      const tflClient = new TFLClient();
       const directions = await tflClient.getDirections(start, destination);
 
       res.status(200).json({ directions });

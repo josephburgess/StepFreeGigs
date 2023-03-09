@@ -6,6 +6,7 @@ import {
   Alert,
   Linking,
 } from 'react-native';
+import { Button } from '@rneui/themed';
 
 export default function BuyTicketsButton({ url }) {
   const handlePress = async () => {
@@ -16,10 +17,13 @@ export default function BuyTicketsButton({ url }) {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={handlePress} testID='Buy Tickets button'>
-      <View>
-        <Text>Buy Tickets</Text>
-      </View>
-    </TouchableWithoutFeedback>
+    <Button 
+      onPress={handlePress} 
+      testID='Buy Tickets button'
+      size='sm'
+      color='#FFA458'
+    >
+      Buy Tickets
+    </Button>
   );
 }

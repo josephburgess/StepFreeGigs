@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import SearchScreen from './components/searchScreen/searchScreen';
 import JourneyScreen from './components/journeyScreen/journeyScreen';
@@ -39,23 +39,43 @@ export default function App() {
   }, []);
 
   return (
+
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Search'>
+      <Stack.Navigator
+        initialRouteName='Search'
+        screenOptions={{
+          contentStyle: {
+            backgroundColor: '#FFFFFF',
+          },
+        }}
+      >
+
         <Stack.Screen
           name='Search'
           component={SearchScreen}
           initialParams={{ currentLocation }}
+          options={{
+            headerStyle: {
+              backgroundColor: '#FFA458',
+            },
+            headerTintColor: '#FFA458',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            // additional styles for the SearchScreen component can go here
+          }}
         />
         <Stack.Screen name='Journey' component={JourneyScreen}></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
+
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#FFF',
     alignItems: 'center',
     justifyContent: 'center',
   },

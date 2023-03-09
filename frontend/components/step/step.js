@@ -6,9 +6,11 @@ export default function Step({ step }) {
     <>
       <View style={styles.stepContainer}>
         <Text style={styles.stepHeading} testID='Step'>
-          {step.descriptionHeading}
+          {step.descriptionHeading?.replace('Walk', 'Travel')}
         </Text>
-        <Text style={styles.stepDesc}>{step.description}</Text>
+        <Text style={styles.stepDesc}>
+          {step.description?.replace('Walk', 'Travel')}
+        </Text>
       </View>
     </>
   );

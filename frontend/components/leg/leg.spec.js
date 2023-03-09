@@ -48,4 +48,16 @@ describe('leg component', () => {
       renderedComponent.getByText('Step');
     }).toThrow(new Error('Unable to find an element with text: Step'));
   });
+
+  it('replaces Walk with Travel', () => {
+    walkSummaryProp = 'Walk forwards';
+
+    renderedComponent = render(
+      <Leg summary={walkSummaryProp} steps={stepProp} />
+    );
+    expect(() => {
+      renderedComponent.getByText('Walk forwards');
+    }).toThrow(new Error('Unable to find an element with text: Walk forwards'));
+    expect(renderedComponent.getByText('Travel forwards')).not.toBe(null);
+  });
 });

@@ -1,6 +1,8 @@
-const axios = require('axios');
-const dotenv = require('dotenv');
+// const Axios = require('axios');
 // const ticketMasterAPIKey = require('../ticketMasterAPIKey');
+const axios = require('./axios.js');
+const dotenv = require('dotenv');
+
 
 class TicketmasterClient {
   constructor() {
@@ -8,8 +10,6 @@ class TicketmasterClient {
   }
 
   async getEvents(latlong, radius) {
-    console.log('deployed API key potato');
-    console.log(process.env.TICKET_MASTER_API_KEY);
     const response = await axios.get(`${this.baseUrl}/events`, {
       params: {
         apikey: process.env.TICKET_MASTER_API_KEY,
@@ -19,24 +19,32 @@ class TicketmasterClient {
         sort: 'date,asc',
         classificationId: 'KZFzniwnSyZfZ7v7nJ',
       },
+      cache: {
+        ttl: 1000 * 60 * 10, // 10 minutes
+      }
     });
 
-    const events = response.data._embedded.events.map((event) => {
-      return {
-        id: event.id,
-        eventName: event.name,
-        url: event.url,
-        date: event.dates.start.dateTime,
-        priceRanges: event.priceRanges
-          ? `£${event.priceRanges[0].min} - £${event.priceRanges[1].max}`
-          : 'Prices not found!',
-        venue: event._embedded.venues[0].name,
-        venueAddress: event._embedded.venues[0].address.line1,
-        venuePostcode: event._embedded.venues[0].postalCode,
-        image: event.images[0].url,
-        distance: `${event.distance} miles`,
-      };
-    });
+    let events = []
+
+    if (response.data.hasOwnProperty('_embedded')){
+      events = response.data._embedded.events.map((event) => {
+        return {
+          id: event.id,
+          eventName: event.name,
+          url: event.url,
+          date: event.dates.start.dateTime,
+          priceRanges: event.priceRanges
+            ? `£${event.priceRanges[0].min} - £${event.priceRanges[1].max}`
+            : 'Prices not found!',
+          venue: event._embedded.venues[0].name,
+          venueAddress: event._embedded.venues[0].address.line1,
+          venuePostcode: event._embedded.venues[0].postalCode,
+          image: event.images[0].url,
+          distance: `${event.distance} miles`,
+        };
+      });
+    }
+
     return events;
   }
   catch(error) {

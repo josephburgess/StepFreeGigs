@@ -20,4 +20,28 @@ describe('RouteMap', () => {
     const polylines = getAllByTestId('polyline');
     expect(polylines).toHaveLength(mockLegs.length);
   });
+
+  it('renders the start marker with the correct properties', () => {
+    const { getByTestId } = render(<RouteMap legs={mockLegs} />);
+    const startMarker = getByTestId('start-marker');
+
+    expect(startMarker.props.coordinate).toEqual({
+      latitude: mockLegs[0].departurePoint.lat,
+      longitude: mockLegs[0].departurePoint.lon,
+    });
+    expect(startMarker.props.title).toEqual(
+      `Start at ${mockLegs[0].departurePoint.commonName}`
+    );
+    expect(startMarker.props.pinColor).toEqual('#009688');
+  });
+
+  it('replaces "Walk" with "Travel" in the instruction summary', () => {
+    const { getAllByTestId } = render(<RouteMap legs={mockLegs} />);
+    const markers = getAllByTestId('marker');
+
+    markers.forEach((marker) => {
+      const title = marker.props.title;
+      expect(title).not.toMatch(/Walk/);
+    });
+  });
 });

@@ -14,7 +14,7 @@ describe('Event component testing', () => {
     const { getByText } = render(
       <Event eventData={{ priceRanges: '£22 - £30 ' }} />
     );
-    const textElement = getByText('£22 - £30 ');
+    const textElement = getByText('22 - 30');
     expect(textElement).toBeDefined();
   });
 
@@ -28,7 +28,7 @@ describe('Event component testing', () => {
     const { getByText } = render(
       <Event eventData={{ distance: '1.32 miles' }} />
     );
-    const textElement = getByText('1.32 miles');
+    const textElement = getByText('1.32 mi');
     expect(textElement).toBeDefined();
   });
 
@@ -67,7 +67,7 @@ describe('Event component testing', () => {
   });
 
   test('Pressing view route takes you to journey screen', () => {
-    const mockNavigation = { navigate: jest.fn() };
+    const mockNavigation = { push: jest.fn() };
     const { getByText, getByTestId } = render(
       <Event
         eventData={{ venuePostcode: 'fakePostcode' }}
@@ -77,7 +77,7 @@ describe('Event component testing', () => {
     );
     fireEvent.press(getByTestId('eventButton'));
     fireEvent.press(getByText('View Route'));
-    expect(mockNavigation.navigate).toHaveBeenCalledWith('Journey', {
+    expect(mockNavigation.push).toHaveBeenCalledWith('Journey', {
       currentLocation: 'fakeLocation',
       endLocation: 'fakePostcode',
     });

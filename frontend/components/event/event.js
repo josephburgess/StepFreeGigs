@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Button } from '@rneui/themed';
 import Collapsible from 'react-native-collapsible';
 import BuyTicketsButton from '../buyTicketsButton/buyTicketsButton';
+import Venue from '../../assets/arena.png';
+import Distance from '../../assets/distance.png';
+import Pound from '../../assets/pound-symbol.png';
 
 export default function Event({ eventData, navigation, currentLocation }) {
-  const { eventName, priceRanges, venue, url, distance, venuePostcode } =
+  const { eventName, priceRanges, venue, url, distance, venuePostcode, image } =
     eventData;
   const [isExpanded, setExpanded] = useState(false);
 
@@ -17,13 +20,29 @@ export default function Event({ eventData, navigation, currentLocation }) {
       <TouchableOpacity onPress={onPress} testID='eventButton'>
         <View style={styles.eventHeader}>
           <View style={styles.eventHeaderLeft}>
-            <Text style={styles.eventName}>{eventName}</Text>
-            <Text style={styles.eventVenue}>{venue}</Text>
+            <View style={styles.nameContainer}>
+              <Image source={{uri: image}} style={styles.thumbnail} />
+              <Text style={styles.eventName}>{eventName}</Text>
+            </View>
+            <View style={styles.venueContainer}>
+              <Image source={Venue} style={styles.venueImage} />
+              <Text style={styles.eventVenue}>{venue}</Text>
+            </View>
           </View>
           {/* <Text>{date}</Text> */}
           <View style={styles.eventHeaderRight}>
-            <Text style={styles.eventPrice}>{priceRanges}</Text>
-            <Text style={styles.eventDistance}>{distance}</Text>
+            <View style={styles.pricesContainer}>
+              <Image source={Pound} style={styles.poundImage} />
+              { priceRanges && 
+                <Text style={styles.eventPrice}>{priceRanges.replace(/£/g, '')}</Text>
+              }
+            </View>
+            <View style={styles.distanceContainer}>
+              <Image source={Distance} style={styles.distanceImage} />
+              { distance &&
+                <Text style={styles.eventDistance}>{distance.replace('miles', 'mi')}</Text>
+              }
+            </View>
           </View>
         </View>
         <Collapsible collapsed={!isExpanded}>
@@ -35,7 +54,7 @@ export default function Event({ eventData, navigation, currentLocation }) {
             <BuyTicketsButton url={url} />
             <Button
               onPress={() => {
-                navigation.navigate('Journey', {
+                navigation.push('Journey', {
                   currentLocation: currentLocation,
                   endLocation: venuePostcode,
                 });
@@ -61,26 +80,75 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     marginBottom: 6,
+    borderRadius: 10,
+    position: 'relative'
   },
   eventHeader: {
+    Width: '95%',
     minHeight: 50,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  eventHeaderLeft: {},
+  eventHeaderLeft: {
+    maxWidth: '80%',
+  },
   eventHeaderRight: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
+    maxWidth: '20%',
   },
-  eventPrice: {},
+  pricesContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  poundImage: {
+    width: 18,
+    height: 18,
+    marginRight: 5
+  },
+  eventPrice: {
+    fontSize: 15,
+    textAlign: 'left',
+    maxWidth: 45,
+    fontSize: 13,
+  },
+  nameContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10
+  },
+  thumbnail: {
+    width: 40,
+    height: 40,
+    borderRadius: 50,
+    marginRight: 10
+  },
   eventName: {
     fontWeight: 700,
     fontSize: 18,
-    marginBottom: 8,
+    maxWidth: '75%',
   },
-  eventDistance: {},
+  distanceContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  distanceImage: {
+    width: 18,
+    height: 18,
+    marginRight: 4
+  },
+  eventDistance: {
+    textAlign: 'right',
+    marginTop: 8,
+    fontSize: 13,
+    fontWeight: 300
+  },
   eventVenue: {
     fontSize: 16,
   },
@@ -91,5 +159,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginTop: 10,
     minHeight: 30,
+  },
+  venueContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  venueImage: {
+    width: 18,
+    height: 18,
+    marginRight: 5
   },
 });
