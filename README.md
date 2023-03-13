@@ -12,9 +12,19 @@ StepFreeGigs is a mobility app that allows users to find, buy tickets for, and t
 
 ## App demo
 
+<p align="center">
+<img src="https://user-images.githubusercontent.com/4661986/224706113-f53c1130-d2f5-4d7a-8a73-414ab5b45a4b.gif"/>
+</p>
 
 ## Presentation
 
+At the end of the project, the team presented to the rest of our cohort, coaches, friends and family, as well as prospective Makers students at the Makers Demo Day. Here we detailed our team values and our approach, the tech used, and reflections, as well as a demo of the app. Click the image to access the slides.
+
+<p align="center">
+<a href="https://www.canva.com/design/DAFcskqfKt0/7QwtNvJiBgAxgrFqSo7bnQ/view">
+<img width="400" alt="image" src="https://user-images.githubusercontent.com/4661986/224707330-658897f0-01ba-4df6-b269-dc997abd5d9c.png">
+</a>
+</p>
 
 ## How to try the project
 
