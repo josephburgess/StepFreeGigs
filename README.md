@@ -13,7 +13,7 @@ StepFreeGigs is a mobility app that allows users to find, buy tickets for, and t
 ## App demo
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/4661986/224706113-f53c1130-d2f5-4d7a-8a73-414ab5b45a4b.gif"/>
+<img width="300" src="https://user-images.githubusercontent.com/4661986/224706113-f53c1130-d2f5-4d7a-8a73-414ab5b45a4b.gif"/>
 </p>
 
 ## Presentation
