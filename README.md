@@ -4,11 +4,11 @@ StepFreeGigs is a mobility app that allows users to find, buy tickets for, and t
 
 ## Features
 
-[x] User can see a list of nearby wheelchair-accessible events using their device's geolocation features
-[x] User can see the price, distance, name and venue for each event
-[x] User can click a link to buy tickets to each event
-[x] User can see a list of step-free directions to reach the venue 
-[x] User can see those directions visualised on a map
+- [x] User can see a list of nearby wheelchair-accessible events using their device's geolocation features
+- [x] User can see the price, distance, name and venue for each event
+- [x] User can click a link to buy tickets to each event
+- [x] User can see a list of step-free directions to reach the venue 
+- [x] User can see those directions visualised on a map
 
 ## App demo
 
